@@ -1,4 +1,4 @@
-<template>
+<template class="body">
   <div id="app">
     <router-view/>
   </div>
@@ -17,6 +17,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  overflow: hidden;
 }
 </style>
