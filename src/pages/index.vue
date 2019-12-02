@@ -1,17 +1,15 @@
 <template>
   <div class="container">
     <img src="../assets/bg.png" class="bg-img" alt="">
-    <video id="videoCamera" :width="videoWidth" :height="videoHeight" autoplay></video>
-    <!-- <button class="btn" @click="getCompetence()">打开摄像头</button>
-    <button @click="stopNavigator()">关闭摄像头</button> -->
+    <video id="videoCamera" autoplay></video>
   </div>
 </template>
   <script>
   export default {
     data () {
       return {
-        videoWidth: 420,
-        videoHeight: 265,
+        // videoWidth: 420,
+        // videoHeight: 265,
         imgSrc: '',
         thisCancas: null,
         thisContext: null,
@@ -50,7 +48,8 @@
             })
           }
         }
-        var constraints = { audio: false, video: { width: this.videoWidth, height: this.videoHeight, transform: 'scaleX(-1)' } }
+        // { width: this.videoWidth, height: this.videoHeight, transform: 'scaleX(-1)' }
+        var constraints = { audio: false, video: true }
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
           // 旧的浏览器可能没有srcObject
           if ('srcObject' in _this.thisVideo) {
@@ -97,8 +96,9 @@
   }
  video{
     position: absolute;
-    top: 145px;
-    right: 2px;
+    width: 21.8%;
+    height: 24.8%;
+    top: 13vh;
+    right: 0px;
   }
-
   </style>
