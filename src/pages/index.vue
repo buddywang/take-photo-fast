@@ -8,15 +8,34 @@
   export default {
     data () {
       return {
-        // videoWidth: 420,
-        // videoHeight: 265,
-        imgSrc: '',
+        videoWidth: 420,
+        videoHeight: 265,
         thisCancas: null,
         thisContext: null,
         thisVideo: null,
+        canRun: true,
+        loopid: null,
       }
     },
     mounted(){
+      // console.log(window.outerWidth)
+      this.videoWidth = window.outerWidth*0.22
+      this.videoHeight = window.outerHeight*0.247
+      window.onresize = (e)=>{
+        if(this.canRun){
+          this.canRun= false
+          this.loopid = setTimeout(()=>{
+            this.videoWidth = e.currentTarget.innerWidth*0.22
+            this.videoHeight = e.currentTarget.innerHeight*0.247
+            this.getCompetence()
+            this.canRun=true
+          },100)
+        }else{
+          clearTimeout(this.loopid)
+          this.canRun=true
+        }
+        
+      }
       this.getCompetence()
     },
     methods: {
@@ -49,7 +68,7 @@
           }
         }
         // { width: this.videoWidth, height: this.videoHeight, transform: 'scaleX(-1)' }
-        var constraints = { audio: false, video: true }
+        var constraints = { audio: false, video: { width: this.videoWidth, height: this.videoHeight, transform: 'scaleX(-1)' } }
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
           // 旧的浏览器可能没有srcObject
           if ('srcObject' in _this.thisVideo) {
@@ -96,9 +115,9 @@
   }
  video{
     position: absolute;
-    width: 21.8%;
-    height: 24.8%;
-    top: 13vh;
-    right: 0px;
+    /* width: 21.8%;
+    height: 24.8%; */
+    top: 13.2vh;
+    right: 0;
   }
   </style>
